@@ -6,7 +6,14 @@ on:
 jobs:
     push-to-dockerhub:
         runs-on: ubuntu-latest
+        container:
+            image: node:20.3-alpine3.17
         steps:
+            - name: Install Docker
+              run: |
+                apk update
+                apk add docker docker-cli
+                service docker start
             - name: Checkout
               uses: actions/checkout@v3
             - name: Login to DockerHub
