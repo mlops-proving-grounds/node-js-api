@@ -8,6 +8,7 @@ jobs:
         services:
             app:
                 image: alialaa17/simple-node-api
+                # If we use a container we do not need to expose ports. Docker will handle it.
                 # ports:
                 #     - 3001:3000
                 env:
@@ -17,6 +18,7 @@ jobs:
                 # ports:
                 #     - "27017:27017"
         steps:
+            # If we use a container we need to install cURL
             - name: Install cURL
               run: |
                 apt-get -y update
@@ -24,6 +26,8 @@ jobs:
             - name: Dump Services Context
               run: echo '${{ toJson(job.services) }}'
             - name: Post a user
+            # When using a container, we need to use the service name as the hostname
+            # So, instead of localhost, we use app, and instead of port 3001, we use 3000
               run: |
                 curl -X POST http://app:3000/api/users -H "Content-Type: application/json" -d '{"username": "Alice", "address": "Wonderland"}'
             - name: Get all users
