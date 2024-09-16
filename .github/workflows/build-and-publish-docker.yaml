@@ -28,7 +28,7 @@ jobs:
               uses: docker/build-push-action@v4
               with:
                 context: .
-                file: ./Dockerfile
+                file: ./node-js-api/Dockerfile
                 push: true
                 tags: ${{ steps.metadata.outputs.tags }}
-                label: ${{ steps.metadata.outputs.labels }}
+                # label: ${{ steps.metadata.outputs.labels }}
