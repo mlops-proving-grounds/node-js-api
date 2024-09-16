@@ -20,7 +20,7 @@ jobs:
               id: metadata
               uses: docker/metadata-action@v4
               with:
-                images: alialaa17/simple-node-api
+                images: rvcaldwell/simple-node-api
                 tags: |
                     type=semver, pattern={{version}}
                     type=semver, pattern={{major}}.{{minor}}
@@ -31,4 +31,4 @@ jobs:
                 file: ./node-js-api/Dockerfile
                 push: true
                 tags: ${{ steps.metadata.outputs.tags }}
-                # label: ${{ steps.metadata.outputs.labels }}
+                labels: ${{ steps.metadata.outputs.labels }}
